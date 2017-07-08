@@ -12,15 +12,13 @@
 #define NUM_LEDS 1
 
 int probeA = 10;
-int probeB = 9;
 float Vs = 3.3;
 float R2 = 330;
 float dist = 1; // probe lead distance apart 
 int threshold = 100;
 int maxSenseA = 1000;    // the maximum value 
 int minSenseA = 23;      // the minimum value 
-int maxSenseB = 1000;    // the maximum value 
-int minSenseB = 23;      // the minimum value 
+
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
  
@@ -52,15 +50,9 @@ void loop()
   delay(10);
 
 // fade brightness of single LED light
-
 int i = map(readingA, minSenseA, maxSenseA, 0, 255);
 
 strip.setPixelColor(0, i , i , i);
-
-int j = map(readingB, minSenseB, maxSenseB, 0, 255);
-
-strip.setPixelColor(0, i , j , 0);
-
 
 strip.show();
 delay(50);

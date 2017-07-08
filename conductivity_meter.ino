@@ -8,10 +8,6 @@
  */
  
 #include <Adafruit_NeoPixel.h>
-#include "Wire.h"
-#include "SparkFunIMU.h"
-#include "SparkFunLSM303C.h"
-#include "LSM303CTypes.h"
 #define PIN 8
 #define NUM_LEDS 1
 
@@ -25,17 +21,12 @@ int maxSenseA = 1000;    // the maximum value
 int minSenseA = 23;      // the minimum value 
 int maxSenseB = 1000;    // the maximum value 
 int minSenseB = 23;      // the minimum value 
-float x, y, z, w; 
 
-//create a NeoPixel strip
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
-
-//create accelerometer
-LSM303C myIMU;
  
 void setup() 
 {
-  strip.begin(); 
+  strip.begin();
   strip.show();
   Serial.begin(9600);
   Serial.print("reading");
@@ -49,7 +40,6 @@ void setup()
 void loop() 
 {
   int readingA  = analogRead(probeA);     // binary  value read across voltage divider  
-  int readingB  = analogRead(probeB);     // binary  value read across voltage divider  
   float voltage = readingA*(Vs/1023.0);  // voltage read across voltage divider
   float R1 = (R2 * Vs / voltage) - R2;  // resistance in ohms per cm
   
